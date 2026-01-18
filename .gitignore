@@ -1,0 +1,19 @@
+# Node.js dependencies
+**/node_modules/
+
+# Python virtual environments
+**/venv/
+**/.venv/
+**/env/
+**/ENV/
+
+# Python environment-specific files
+**/pyvenv.cfg
+
+# Optional: Also exclude common Python cache and build directories
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+**/.python-version
+**/.pytest_cache/
+**/.mypy_cache/
