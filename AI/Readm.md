@@ -3,7 +3,7 @@
 - This repo is contains the complete topic of the 100xbootcamp.
 - Syllabus for the 100x bootcamp AI
 
-![Syllabus of DSA ](assets/image.png)
+![Syllabus of DSA ](../assets/AI.png)
 
 # Complete content of the AI
 
