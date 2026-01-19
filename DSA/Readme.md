@@ -3,7 +3,7 @@
 - This repo is contains the complete topic of the 100xbootcamp.
 - Syllabus for the 100x bootcamp DSA
 
-![Syllabus of DSA ](assets/image.png)
+![Syllabus of DSA ](../assets/DSA.png)
 
 ## Homework And
 
