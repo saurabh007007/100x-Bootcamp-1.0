@@ -10,30 +10,28 @@
 
 ### 📊 Homework Progress Tracker
 
-| #   | Problem Name                   | Problem Link                                                                        | Status       | Solution                     | Notes                  |
-| --- | ------------------------------ | ----------------------------------------------------------------------------------- | ------------ | ---------------------------- | ---------------------- |
-| 1   | Hello World                    | [A - Hello World](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/A) | ✅ Completed | [Solution](./Solution/A.cpp) | Basic output exercise  |
-| 2   | Print 5 Alphabet               | Link needed                                                                         | ✅ Completed | [Solution](./Solution/B.cpp) | Awaiting problem link  |
-| 3   | Print Pattern                  | Link needed                                                                         | ✅ Completed | [Solution](./Solution/C.cpp) | Bug tracker reference  |
-| 4   | Print Z                        | Link Added                                                                          | ✅ Completed | [Solution](./Solution/D.cpp) | Basic output           |
-| 5   | Print Table of 5               | Link Added                                                                          | ✅ Completed | [Solution](./Solution/E.cpp) | Basic I/O operations   |
-| 6   | Rectange Area and Perimeter    | Link added                                                                          | ✅ Completed | [Solution](./Solution/F.cpp) | Basic I/O operation    |
-| 7   | Print Table Of N               | Link added                                                                          | ✅ Completed | [Solution](./Solution/G.cpp) | Basic I/O and Operator |
-| 8   | Calculator I                   | Link added                                                                          | ✅ Completed | [Solution](./Solution/H.cpp) | Operators and I/O      |
-| 9   | Calculator II                  | Link added                                                                          | ✅ Completed | [Solution](./Solution/I.cpp) | Operators and I/O      |
-| 10  | Add Last Digit                 | Link added                                                                          | ✅ Completed | [Solution](./Solution/J.cpp) | Operators              |
-| 11  | Even Or Odd                    | Link added                                                                          | ✅ Completed | [Solution](./Solution/K.cpp) | Operators              |
-| 12  | K factor                       | Link added                                                                          | ✅ Completed | [Solution](./Solution/L.cpp) | Operators              |
-| 13  | Multiple                       | Link added                                                                          | ✅ Completed | [Solution](./Solution/M.cpp) | Operators              |
-| 14  | Pass or Fail                   | Link added                                                                          | ✅ Completed | [Solution](./Solution/N.cpp) | Operators & Condition  |
-| 15  | Max and Min of 2 Numbers       | Link added                                                                          | ✅ Completed | [Solution](./Solution/O.cpp) | Operators & Condition  |
-| 16  | Max and Min of 3 Numbers       | Link added                                                                          | ✅ Completed | [Solution](./Solution/P.cpp) | Operators & Condition  |
-| 17  | Student Performance Evaluation | Link added                                                                          | ✅ Completed | [Solution](./Solution/Q.cpp) | Operators & Condition  |
-| 18  | Find the location point        | Link added                                                                          | ✅ Completed | [Solution](./Solution/R.cpp) | Operators & Condition  |
+| #   | Problem Name               | Problem Link                                                                             | Status | Solution                  | Notes               |
+| --- | -------------------------- | ---------------------------------------------------------------------------------------- | ------ | ------------------------- | ------------------- |
+| 1   | Hello World                | [A - Hello World](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/A)      | ✅     | [A.cpp](./Solution/A.cpp) | Basic output        |
+| 2   | Print 5 Alphabet           | [B - Print 5 Alphabet](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/B) | ✅     | [B.cpp](./Solution/B.cpp) | Loop basics         |
+| 3   | Print Pattern              | [C - Print Pattern](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/C)    | ✅     | [C.cpp](./Solution/C.cpp) | Nested loops        |
+| 4   | Print Z                    | [D - Print Z](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/D)          | ✅     | [D.cpp](./Solution/D.cpp) | Pattern printing    |
+| 5   | Print Table of 5           | [E - Print Table of 5](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/E) | ✅     | [E.cpp](./Solution/E.cpp) | Loops               |
+| 6   | Rectangle Area & Perimeter | [F - Rectangle](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/F)        | ✅     | [F.cpp](./Solution/F.cpp) | Basic math          |
+| 7   | Print Table of N           | [G - Print Table of N](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/G) | ✅     | [G.cpp](./Solution/G.cpp) | Input & loops       |
+| 8   | Calculator I               | [H - Calculator I](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/H)     | ✅     | [H.cpp](./Solution/H.cpp) | Operators           |
+| 9   | Calculator II              | [I - Calculator II](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/I)    | ✅     | [I.cpp](./Solution/I.cpp) | Operators           |
+| 10  | Add Last Digit             | [J - Add Last Digit](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/J)   | ✅     | [J.cpp](./Solution/J.cpp) | Modulo operator     |
+| 11  | Even or Odd                | [K - Even or Odd](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/K)      | ✅     | [K.cpp](./Solution/K.cpp) | Conditionals        |
+| 12  | K Factor                   | [L - K Factor](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/L)         | ✅     | [L.cpp](./Solution/L.cpp) | Divisibility        |
+| 13  | Multiple                   | [M - Multiple](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/M)         | ✅     | [M.cpp](./Solution/M.cpp) | Divisibility        |
+| 14  | Pass or Fail               | [N - Pass or Fail](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/N)     | ✅     | [N.cpp](./Solution/N.cpp) | Conditionals        |
+| 15  | Max & Min of 2 Numbers     | [O - Max & Min](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/O)        | ✅     | [O.cpp](./Solution/O.cpp) | Comparison          |
+| 16  | Max & Min of 3 Numbers     | [P - Max & Min of 3](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/P)   | ✅     | [P.cpp](./Solution/P.cpp) | Nested conditionals |
+| 17  | Student Performance        | [Q - Performance](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/Q)      | ✅     | [Q.cpp](./Solution/Q.cpp) | Grade logic         |
+| 18  | Find Location Point        | [R - Location](https://codeforces.com/group/4vcXCPx8NY/contest/664504/problem/R)         | ✅     | [R.cpp](./Solution/R.cpp) | Quadrant logic      |
 
-## 🔧 Additional Information
+## 🔗 Quick Links
 
-### ❗ Issues & Reports
-
-- **Bug Tracker**: Issues can be reported via [Report Issues](./Solution/C.cpp) (Note: This seems to be a solution file, not a bug tracker)
-- **Missing Links**: Problem links for B and C need to be updated
+- **Codeforces Group**: [4vcXCPx8NY](https://codeforces.com/group/4vcXCPx8NY/)
+- **Solutions Directory**: [./Solution/](./Solution/)
