@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  customer
+  owner
+}
+
+enum BookingStatus {
+  confirmed
+  cancelled
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role
+  phone     String?
+  createdAt DateTime @default(now())
+
+  hotels    Hotel[]
+  bookings  Booking[]
+  reviews   Review[]
+}
+
+model Hotel {
+  id           String   @id @default(uuid())
+  ownerId      String?
+  name         String
+  description  String?
+  city         String
+  country      String
+  amenities    Json     @default("[]")
+  rating       Decimal  @default(0.0)
+  totalReviews Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  owner        User?    @relation(fields: [ownerId], references: [id])
+  rooms        Room[]
+  bookings     Booking[]
+  reviews      Review[]
+}
+
+model Room {
+  id             String   @id @default(uuid())
+  hotelId        String
+  roomNumber     String
+  roomType       String
+  pricePerNight  Decimal
+  maxOccupancy   Int
+  createdAt      DateTime @default(now())
+
+  hotel          Hotel    @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  bookings       Booking[]
+
+  @@unique([hotelId, roomNumber])
+}
+
+model Booking {
+  id           String         @id @default(uuid())
+  userId       String
+  roomId       String
+  hotelId      String
+  checkInDate  DateTime
+  checkOutDate DateTime
+  guests       Int
+  totalPrice   Decimal
+  status       BookingStatus @default(confirmed)
+  bookingDate  DateTime       @default(now())
+  cancelledAt  DateTime?
+
+  user         User           @relation(fields: [userId], references: [id])
+  room         Room           @relation(fields: [roomId], references: [id])
+  hotel        Hotel          @relation(fields: [hotelId], references: [id])
+  review       Review?
+
+  @@index([userId])
+  @@index([roomId])
+  @@index([hotelId])
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  userId    String
+  hotelId   String
+  bookingId String @unique
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  hotel     Hotel    @relation(fields: [hotelId], references: [id])
+  booking   Booking  @relation(fields: [bookingId], references: [id])
+
+  @@unique([userId, bookingId])
+}
