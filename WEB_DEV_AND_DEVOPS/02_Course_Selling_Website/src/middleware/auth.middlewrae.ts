@@ -1,13 +1,19 @@
 import type { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../utils/jwt.utils";
 
-export interface AuthRequest extends Request {
-  userId?: string;
-  role?: "STUDENT" | "INSTRUCTOR";
+declare global {
+  namespace Express {
+    export interface Request {
+      user?: {
+        id: string;
+        role: "INSTRUCTOR" | "STUDENT";
+      };
+    }
+  }
 }
 
 export function authMiddleware(
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) {
@@ -21,8 +27,10 @@ export function authMiddleware(
 
   try {
     const payload = verifyToken(token!);
-    req.userId = payload.userId;
-    req.role = payload.role;
+    req.user = {
+      id: payload.userId,
+      role: payload.role,
+    };
     next();
   } catch {
     return res.status(401).json({ error: "Invalid token" });
