@@ -5,6 +5,6 @@ import { createLession } from "../controllers/lessions.controller";
 
 const router = Router();
 
-router.get("/", authMiddleware, requireRole("INSTRUCTOR"), createLession);
+router.post("/", authMiddleware, requireRole("INSTRUCTOR"), createLession);
 
 export default router;

@@ -10,7 +10,7 @@ export const createLession = async (req: Request, res: Response) => {
       .status(400)
       .json({ error: "Invalid request body", details: parsedBody.error });
   }
-  const courseId = String(req.params.courseId);
+  const courseId = String(req.params.courseId || parsedBody.data.courseId);
   try {
     const course = await prisma.course.findUnique({
       where: { id: courseId },
@@ -28,10 +28,7 @@ export const createLession = async (req: Request, res: Response) => {
         courseId,
       },
     });
-    res.status(201).json({
-      message: "Lession created successfully",
-      lession: newLession,
-    });
+    res.status(200).json(newLession);
   } catch (error) {
     console.error("Error creating lession:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -44,7 +41,7 @@ export const getAllLessions = async (req: Request, res: Response) => {
     const lessions = await prisma.lesson.findMany({
       where: { courseId },
     });
-    res.status(200).json({ lessions });
+    res.status(200).json(lessions);
   } catch (error) {
     console.error("Error fetching lession:", error);
     res.status(500).json({ error: "Internal server error" });

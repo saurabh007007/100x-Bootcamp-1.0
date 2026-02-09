@@ -6,6 +6,10 @@ import {
   getCourseById,
   updateCourseById,
 } from "../controllers/course.controller";
+import {
+  createLession,
+  getAllLessions,
+} from "../controllers/lessions.controller";
 import { authMiddleware } from "../middleware/auth.middlewrae";
 import { requireRole } from "../middleware/role.middleware";
 
@@ -16,7 +20,7 @@ router
   .get("/", getAllCourses)
   .post("/", authMiddleware, requireRole("INSTRUCTOR"), createCourse);
 
-router.get("/:id", authMiddleware, getCourseById);
+router.get("/:id", getCourseById);
 router.patch(
   "/:id",
   authMiddleware,
@@ -24,11 +28,12 @@ router.patch(
   updateCourseById,
 );
 router.delete("/:id", authMiddleware, requireRole("INSTRUCTOR"), deleteCourse);
-router.get(
-  "/:courseId/lessions",
+router.post(
+  "/:courseId/lessons",
   authMiddleware,
   requireRole("INSTRUCTOR"),
-  getCourseById,
+  createLession,
 );
+router.get("/:courseId/lessons", getAllLessions);
 
 export default router;
