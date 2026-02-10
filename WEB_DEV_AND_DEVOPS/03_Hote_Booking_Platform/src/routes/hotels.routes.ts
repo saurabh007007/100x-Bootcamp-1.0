@@ -4,7 +4,8 @@ import { requireRole } from "../middleware/checkRole";
 import {
   createHotels,
   createRooms,
-  getHotelsWithAllRoomsWithHotelId,
+  getAllHotels,
+  getHotelById,
 } from "../controllers/hotels.controller";
 
 const router = Router();
@@ -12,6 +13,7 @@ const router = Router();
 //Create hotel
 router.post("/", authMiddleware, requireRole("owner"), createHotels);
 router.post("/:id/rooms", authMiddleware, requireRole("owner"), createRooms);
-router.get("/:id", authMiddleware, getHotelsWithAllRoomsWithHotelId);
+router.get("/", authMiddleware, getAllHotels);
+router.get("/:id", authMiddleware, getHotelById);
 
 export default router;

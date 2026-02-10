@@ -16,13 +16,11 @@ export const LoginSchema = z.object({
 });
 
 export const HotelSchema = z.object({
-  name: z.string().min(3, "Hotel name must be greater then 3 character"),
-  description: z
-    .string()
-    .min(10, "Description must be greater then 10 character"),
-  city: z.string().min(3, "City name must be greater then 3 character"),
-  country: z.string().min(3, "Country name must be greater then 3 character"),
-  amenities: z.array(z.string()).min(1, "At least one amenity is required"),
+  name: z.string().min(1, "Hotel name is required"),
+  description: z.string().optional(),
+  city: z.string().min(1, "City name is required"),
+  country: z.string().min(1, "Country name is required"),
+  amenities: z.array(z.string()).optional(),
 });
 
 export const RoomSchema = z.object({

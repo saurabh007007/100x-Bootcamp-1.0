@@ -5,7 +5,7 @@ export const requireRole = (role: "customer" | "owner") => {
     if (req.user?.role !== role) {
       return res
         .status(403)
-        .json({ success: false, message: "FORBIDDEN", data: null });
+        .json({ success: false, data: null, error: "FORBIDDEN" });
     }
     next();
   };

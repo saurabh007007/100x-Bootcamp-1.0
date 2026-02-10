@@ -71,7 +71,7 @@ export const Login = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      return res.status(400).json({
+      return res.status(401).json({
         success: false,
         data: null,
         error: "INVALID_CREDENTIALS",
@@ -79,7 +79,7 @@ export const Login = async (req: Request, res: Response) => {
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(400).json({
+      return res.status(401).json({
         success: false,
         data: null,
         error: "INVALID_CREDENTIALS",

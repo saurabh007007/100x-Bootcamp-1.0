@@ -19,7 +19,7 @@ export const createHotels = async (req: Request, res: Response) => {
         description,
         city,
         country,
-        amenities,
+        amenities: amenities ?? [],
         ownerId: req.user!.userId,
       },
     });
@@ -27,12 +27,13 @@ export const createHotels = async (req: Request, res: Response) => {
       success: true,
       data: {
         id: newHotel.id,
+        ownerId: newHotel.ownerId,
         name: newHotel.name,
         description: newHotel.description,
         city: newHotel.city,
         country: newHotel.country,
         amenities: newHotel.amenities,
-        rating: newHotel.rating,
+        rating: Number(newHotel.rating),
         totalReviews: newHotel.totalReviews,
       },
       error: null,
@@ -50,7 +51,6 @@ export const createHotels = async (req: Request, res: Response) => {
 export const createRooms = async (req: Request, res: Response) => {
   const id = String(req.params.id);
   const bodyParse = RoomSchema.safeParse(req.body);
-  console.log("Parsed body:", bodyParse);
   if (!bodyParse.success) {
     return res.status(400).json({
       success: false,
@@ -97,7 +97,7 @@ export const createRooms = async (req: Request, res: Response) => {
         id: newRoom.id,
         roomNumber: newRoom.roomNumber,
         roomType: newRoom.roomType,
-        pricePerNight: newRoom.pricePerNight,
+        pricePerNight: Number(newRoom.pricePerNight),
         maxOccupancy: newRoom.maxOccupancy,
         hotelId: newRoom.hotelId,
       },
@@ -113,17 +113,71 @@ export const createRooms = async (req: Request, res: Response) => {
   }
 };
 
-export const getHotelsWithAllRoomsWithHotelId = async (
-  req: Request,
-  res: Response,
-) => {
+export const getAllHotels = async (req: Request, res: Response) => {
+  try {
+    const { city, country, minPrice, maxPrice } = req.query;
+
+    const where: any = {};
+    if (city) where.city = { equals: city as string, mode: "insensitive" };
+    if (country)
+      where.country = { equals: country as string, mode: "insensitive" };
+
+    const hotels = await prisma.hotel.findMany({
+      where,
+      include: { rooms: true },
+    });
+
+    let result = hotels.map((hotel) => {
+      const minPricePerNight =
+        hotel.rooms.length > 0
+          ? Math.min(...hotel.rooms.map((r) => Number(r.pricePerNight)))
+          : 0;
+      return {
+        id: hotel.id,
+        ownerId: hotel.ownerId,
+        name: hotel.name,
+        description: hotel.description,
+        city: hotel.city,
+        country: hotel.country,
+        amenities: hotel.amenities,
+        rating: Number(hotel.rating),
+        totalReviews: hotel.totalReviews,
+        minPricePerNight,
+      };
+    });
+
+    if (minPrice) {
+      result = result.filter(
+        (h) => h.minPricePerNight >= Number(minPrice),
+      );
+    }
+    if (maxPrice) {
+      result = result.filter(
+        (h) => h.minPricePerNight <= Number(maxPrice),
+      );
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: result,
+      error: null,
+    });
+  } catch (error) {
+    console.error("Error fetching hotels:", error);
+    return res.status(500).json({
+      success: false,
+      data: null,
+      error: "INTERNAL_SERVER_ERROR",
+    });
+  }
+};
+
+export const getHotelById = async (req: Request, res: Response) => {
   try {
     const id = String(req.params.id);
     const hotel = await prisma.hotel.findUnique({
-      where: { id: id },
-      include: {
-        rooms: true,
-      },
+      where: { id },
+      include: { rooms: true },
     });
     if (!hotel) {
       return res.status(404).json({
@@ -133,18 +187,20 @@ export const getHotelsWithAllRoomsWithHotelId = async (
       });
     }
 
-    const hotels = await prisma.hotel.findMany({
-      include: {
-        rooms: true,
-      },
-    });
     return res.status(200).json({
       success: true,
-      data: hotels,
+      data: {
+        ...hotel,
+        rating: Number(hotel.rating),
+        rooms: hotel.rooms.map((r) => ({
+          ...r,
+          pricePerNight: Number(r.pricePerNight),
+        })),
+      },
       error: null,
     });
   } catch (error) {
-    console.error("Error fetching hotels with rooms:", error);
+    console.error("Error fetching hotel:", error);
     return res.status(500).json({
       success: false,
       data: null,

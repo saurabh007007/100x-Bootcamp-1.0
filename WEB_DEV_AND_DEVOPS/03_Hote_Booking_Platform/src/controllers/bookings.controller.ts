@@ -26,14 +26,17 @@ export const createBooking = async (req: Request, res: Response) => {
 
     const checkIn = new Date(checkInDate);
     const checkOut = new Date(checkOutDate);
-    const today = new Date();
 
-    if (
-      isNaN(checkIn.getTime()) ||
-      isNaN(checkOut.getTime()) ||
-      checkIn >= checkOut ||
-      checkIn < today
-    ) {
+    if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime()) || checkOut <= checkIn) {
+      return res.status(400).json({
+        success: false,
+        data: null,
+        error: "INVALID_REQUEST",
+      });
+    }
+
+    const todayStr = new Date().toISOString().split("T")[0];
+    if (checkInDate < todayStr) {
       return res.status(400).json({
         success: false,
         data: null,
@@ -102,7 +105,18 @@ export const createBooking = async (req: Request, res: Response) => {
 
     return res.status(201).json({
       success: true,
-      data: booking,
+      data: {
+        id: booking.id,
+        userId: booking.userId,
+        roomId: booking.roomId,
+        hotelId: booking.hotelId,
+        checkInDate: booking.checkInDate,
+        checkOutDate: booking.checkOutDate,
+        guests: booking.guests,
+        totalPrice: Number(booking.totalPrice),
+        status: booking.status,
+        bookingDate: booking.bookingDate,
+      },
       error: null,
     });
   } catch (err: any) {
@@ -189,7 +203,7 @@ export const getMyBookings = async (req: Request, res: Response) => {
       checkInDate: b.checkInDate,
       checkOutDate: b.checkOutDate,
       guests: b.guests,
-      totalPrice: b.totalPrice,
+      totalPrice: Number(b.totalPrice),
       status: b.status,
       bookingDate: b.bookingDate,
     }));
@@ -232,7 +246,7 @@ export const cancelBooking = async (req: Request, res: Response) => {
       return res.status(404).json({
         success: false,
         data: null,
-        error: "NOT_FOUND",
+        error: "BOOKING_NOT_FOUND",
       });
     }
 
