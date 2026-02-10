@@ -110,7 +110,7 @@ export const Login = async (req: Request, res: Response) => {
   }
 };
 
-const ChcekProfile = async (req: Request, res: Response) => {
+export const CheckProfile = async (req: Request, res: Response) => {
   const { userId } = req.user as { userId: string };
   try {
     const user = await prisma.user.findUnique({
