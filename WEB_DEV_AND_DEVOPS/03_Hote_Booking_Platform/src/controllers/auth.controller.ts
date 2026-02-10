@@ -109,3 +109,33 @@ export const Login = async (req: Request, res: Response) => {
     });
   }
 };
+
+const ChcekProfile = async (req: Request, res: Response) => {
+  const { userId } = req.user as { userId: string };
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        phone: true,
+        role: true,
+      },
+    });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+        error: "USER_NOT_FOUND",
+      });
+    }
+  } catch (error) {
+    console.error("Profile error:", error);
+    return res.status(500).json({
+      success: false,
+      data: null,
+      error: "INTERNAL_SERVER_ERROR",
+    });
+  }
+};
