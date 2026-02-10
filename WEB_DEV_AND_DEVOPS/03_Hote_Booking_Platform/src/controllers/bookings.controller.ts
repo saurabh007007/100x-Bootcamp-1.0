@@ -27,7 +27,11 @@ export const createBooking = async (req: Request, res: Response) => {
     const checkIn = new Date(checkInDate);
     const checkOut = new Date(checkOutDate);
 
-    if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime()) || checkOut <= checkIn) {
+    if (
+      isNaN(checkIn.getTime()) ||
+      isNaN(checkOut.getTime()) ||
+      checkOut <= checkIn
+    ) {
       return res.status(400).json({
         success: false,
         data: null,
@@ -35,7 +39,7 @@ export const createBooking = async (req: Request, res: Response) => {
       });
     }
 
-    const todayStr = new Date().toISOString().split("T")[0];
+    const todayStr = new Date().toISOString().split("T")[0]!;
     if (checkInDate < todayStr) {
       return res.status(400).json({
         success: false,
