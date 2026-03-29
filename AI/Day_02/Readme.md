@@ -1,4 +1,3 @@
-# Some of the usefull resource of the course
+# Resource
 
-- **LLM visualization -** https://bbycroft.net/llm
-- **Jailbreaking AI -** https://github.com/elder-plinius/L1B3RT4S
+- **_Collab Book _** https://colab.research.google.com/drive/1OuJA1KC2IUexv0TXGkkQTTl1B-kJKV-P?usp=sharing
